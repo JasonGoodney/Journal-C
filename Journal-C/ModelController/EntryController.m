@@ -54,7 +54,9 @@
     
     NSData *data = [NSJSONSerialization dataWithJSONObject:entriesDictionary
                                                    options:NSJSONWritingPrettyPrinted error:nil];
-    [data writeToURL:self.fileURL options:NSDataWritingAtomic error:nil];
+    // po data returns hex format
+    [data writeToURL:self.fileURL options:NSDataWritingWithoutOverwriting error:nil];
+    //po [NSData dataWithContentsOfURL:self.fileURL] returns hex format
 }
 
 // 0 == true
@@ -63,24 +65,19 @@
 // ^ so ![[NSData dataWithContentsOfURL:self.fileURL] isEqual:nil]?
 - (void)loadFromPersistantStore {
     if (![[NSData dataWithContentsOfURL:self.fileURL] isEqual:nil]) {
-        NSLog(@"data from fileURL is, %@ \nexpect: true(1)\nactual: (%d)",
+        NSLog(@"data from fileURL is, %@ \nexpect: true(0)\nactual: (%d)",
               [NSData dataWithContentsOfURL:self.fileURL],
               [[NSData dataWithContentsOfURL:self.fileURL] isEqual:nil]);
-        return;
+        
     } else {
-        NSLog(@"data from fileURL is, %@ \nexpect: false(0)\nactual: (%d)",
+        NSLog(@"data from fileURL is, %@ \nexpect: false(1)\nactual: (%d)",
               [NSData dataWithContentsOfURL:self.fileURL],
-              [[NSData dataWithContentsOfURL:self.fileURL] isEqual:nil]
-              );
-        // Logs data is null, isEqual:nil false
+              [[NSData dataWithContentsOfURL:self.fileURL] isEqual:nil]);
     }
     
-    NSData *data = [[NSData alloc] init];
-    // data == <>
-    data = [NSData dataWithContentsOfURL:self.fileURL];
-    // data == nil
+    NSData *data = [NSData dataWithContentsOfURL:self.fileURL];
     
-    if (![data isEqual:nil]) {
+    if ([data isEqual:nil]) {
         return;
     }
     
@@ -97,7 +94,7 @@
 - (NSURL *)fileURL {
     NSArray *paths = [[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask];
     NSString *fileName = @"entries.json";
-    NSURL *documentDirectoryURL = [paths[0] URLByAppendingPathExtension:fileName];
+    NSURL *documentDirectoryURL = [paths[0] URLByAppendingPathComponent:fileName];
     return documentDirectoryURL;
     
     /*
