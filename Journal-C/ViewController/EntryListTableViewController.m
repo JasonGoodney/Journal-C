@@ -14,6 +14,10 @@
 
 @implementation EntryListTableViewController
 
+static NSString * const reuseIdentifier = @"entryCell";
+static NSString * const toEntryView = @"toEntryView";
+static NSString * const toAddEntry = @"toAddEntry";
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -37,7 +41,7 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"entryCell" forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
     
     Entry *entry = [[EntryController shared].entries objectAtIndex:indexPath.row];
     
@@ -60,13 +64,13 @@
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([[segue identifier]  isEqual: @"toUpdateEntry"]) {
+    if ([[segue identifier] isEqual:toEntryView]) {
         
         EntryDetailViewController *destinationVC = [segue destinationViewController];
         
         NSInteger index = [self.tableView indexPathForSelectedRow].row;
         Entry *entry = EntryController.shared.entries[index];
-        [destinationVC updateWithEntry:entry];
+        destinationVC.entry = entry;
     }
 }
 

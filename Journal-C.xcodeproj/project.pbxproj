@@ -69,19 +69,11 @@
 			children = (
 				D7814E60214592D900CC7A89 /* Model */,
 				D7814E62214592D900CC7A89 /* ModelController */,
-				D7814E5E214592D900CC7A89 /* View */,
 				D7814E61214592D900CC7A89 /* ViewController */,
 				D7814E4E214591D000CC7A89 /* Main.storyboard */,
 				D7814E5F214592D900CC7A89 /* Resources */,
 			);
 			path = "Journal-C";
-			sourceTree = "<group>";
-		};
-		D7814E5E214592D900CC7A89 /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		D7814E5F214592D900CC7A89 /* Resources */ = {

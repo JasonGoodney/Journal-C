@@ -29,7 +29,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="FL8-6O-f78" kind="show" identifier="toViewEntry" id="Ywa-ma-oSi"/>
+                                    <segue destination="FL8-6O-f78" kind="show" identifier="toEntryView" id="Ywa-ma-oSi"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

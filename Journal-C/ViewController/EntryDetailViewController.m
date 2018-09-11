@@ -16,7 +16,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+}
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    if (![_entry isEqual:nil]) {
+        [self updateWithEntry:_entry];
+    }
 }
 
 - (void)updateWithEntry:(Entry *)entry {
@@ -49,7 +57,7 @@
             NSLog(@"update");
             _entry.title = title;
             _entry.text = text;
-            _entry.timestamp = [[NSDate alloc] init];
+            _entry.timestamp = [NSDate date];
         }
         
         [self.navigationController popViewControllerAnimated:YES];

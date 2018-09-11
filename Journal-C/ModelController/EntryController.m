@@ -59,8 +59,10 @@
 
 // 0 == true
 // 1 == false
+// The object to be compared to the receiver. May be nil, in which case this method returns NO.
+// ^ so ![[NSData dataWithContentsOfURL:self.fileURL] isEqual:nil]?
 - (void)loadFromPersistantStore {
-    if ([[NSData dataWithContentsOfURL:self.fileURL] isEqual:nil]) {
+    if (![[NSData dataWithContentsOfURL:self.fileURL] isEqual:nil]) {
         NSLog(@"data from fileURL is, %@ \nexpect: true(1)\nactual: (%d)",
               [NSData dataWithContentsOfURL:self.fileURL],
               [[NSData dataWithContentsOfURL:self.fileURL] isEqual:nil]);
@@ -78,7 +80,7 @@
     data = [NSData dataWithContentsOfURL:self.fileURL];
     // data == nil
     
-    if ([data isEqual:nil]) {
+    if (![data isEqual:nil]) {
         return;
     }
     
